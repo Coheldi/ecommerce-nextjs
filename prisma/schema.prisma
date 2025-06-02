@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Familia de productos (ej: Lácteos, Panadería, etc.)
+model Familia {
+  id          String      @id @default(cuid())
+  nombre      String
+  descripcion String?
+  categorias  Categoria[]
+  productos   Producto[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+// Categoría dentro de una familia
+model Categoria {
+  id          String     @id @default(cuid())
+  nombre      String
+  descripcion String?
+  familiaId   String
+  familia     Familia    @relation(fields: [familiaId], references: [id])
+  productos   Producto[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// Tags/Etiquetas para productos
+model Tag {
+  id        String     @id @default(cuid())
+  nombre    String     @unique
+  productos Producto[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// Producto
+model Producto {
+  id                  String     @id @default(cuid())
+  nombre              String
+  descripcion         String
+  imagenes            String[]   // Array de URLs de imágenes
+  precio             Float
+  unidadMedida       String     // ej: kg, litro, unidad
+  sku                String     @unique
+  stock              Int        @default(0)
+  infoNutricional    Json?      // Información nutricional como JSON
+  alergenos          String[]   // Array de alérgenos
+  familiaId          String
+  familia            Familia    @relation(fields: [familiaId], references: [id])
+  categoriaId        String
+  categoria          Categoria  @relation(fields: [categoriaId], references: [id])
+  tags               Tag[]
+  pedidoItems        PedidoItem[]
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+}
+
+// Usuario
+model Usuario {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  nombre        String
+  password      String
+  rol           String    @default("cliente") // cliente o admin
+  direcciones   Direccion[]
+  pedidos       Pedido[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Dirección de envío
+model Direccion {
+  id          String   @id @default(cuid())
+  calle       String
+  numero      String
+  piso        String?
+  codigoPostal String
+  ciudad      String
+  provincia   String
+  usuarioId   String
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+  pedidos     Pedido[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Pedido
+model Pedido {
+  id            String      @id @default(cuid())
+  usuarioId     String
+  usuario       Usuario     @relation(fields: [usuarioId], references: [id])
+  direccionId   String
+  direccion     Direccion   @relation(fields: [direccionId], references: [id])
+  estado        String      // Pendiente, Procesando, Enviado, Entregado, Cancelado
+  items         PedidoItem[]
+  total         Float
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+// Item de pedido
+model PedidoItem {
+  id          String   @id @default(cuid())
+  pedidoId    String
+  pedido      Pedido   @relation(fields: [pedidoId], references: [id])
+  productoId  String
+  producto    Producto @relation(fields: [productoId], references: [id])
+  cantidad    Int
+  precioUnitario Float
+  subtotal    Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
