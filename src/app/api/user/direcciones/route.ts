@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { headers } from 'next/headers'
 
 export async function POST(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const headersList = await headers()
     const userId = headersList.get('x-user-id')
 
@@ -41,6 +43,9 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const headersList = await headers()
     const userId = headersList.get('x-user-id')
 
@@ -101,6 +106,9 @@ export async function DELETE(request: Request) {
 
 export async function PUT(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const headersList = await headers()
     const userId = headersList.get('x-user-id')
 

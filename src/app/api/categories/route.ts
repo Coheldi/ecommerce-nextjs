@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 
 export async function GET(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const { searchParams } = new URL(request.url)
     const familiaId = searchParams.get('familiaId')
 
@@ -32,6 +34,9 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const json = await request.json()
 
     const categoria = await prisma.categoria.create({

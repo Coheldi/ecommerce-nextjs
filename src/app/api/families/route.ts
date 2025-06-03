@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 
 export async function GET() {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const familias = await prisma.familia.findMany({
       include: {
         categorias: {
@@ -29,6 +31,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const json = await request.json()
 
     const familia = await prisma.familia.create({
@@ -53,6 +58,9 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const json = await request.json()
     const { id, ...data } = json
 
@@ -76,6 +84,9 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 

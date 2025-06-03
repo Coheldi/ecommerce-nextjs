@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { headers } from 'next/headers'
 import bcrypt from 'bcryptjs'
 
 export async function GET() {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const headersList = await headers()
     const userId = headersList.get('x-user-id')
 
@@ -44,6 +46,9 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const headersList = await headers()
     const userId = headersList.get('x-user-id')
 

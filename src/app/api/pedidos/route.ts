@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import { getAuthUser } from '@/lib/auth'
 
 export async function POST(req: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const user = await getAuthUser(req)
     if (!user) {
       return NextResponse.json(
@@ -121,6 +123,9 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
+    // Dynamic import of Prisma client
+    const { prisma } = await import('@/lib/prisma')
+    
     const user = await getAuthUser(req)
     if (!user) {
       return NextResponse.json(
