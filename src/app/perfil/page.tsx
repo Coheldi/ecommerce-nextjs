@@ -97,8 +97,7 @@ export default function ProfilePage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
-        <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-12">
             <h1 className="text-5xl font-bold mb-4 text-gradient">Mi Perfil</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

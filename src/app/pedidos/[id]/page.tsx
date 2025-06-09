@@ -85,8 +85,7 @@ export default function PedidoDetailPage({ params }: { params: { id: string } })
 
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
-          <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-12">
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h1 className="text-4xl font-bold text-gradient mb-2">

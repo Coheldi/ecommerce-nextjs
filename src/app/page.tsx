@@ -51,10 +51,9 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
-      <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <section className="relative h-[600px] rounded-3xl overflow-hidden mb-16 shadow-2xl">
+    <div className="container mx-auto px-4 py-8">
+      {/* Hero Section */}
+      <section className="relative h-[600px] rounded-3xl overflow-hidden mb-16 shadow-2xl">
           <Image
             src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg"
             alt="Banner principal de la tienda"
