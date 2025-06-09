@@ -61,110 +61,126 @@ export default function NuevaDireccionPage() {
 
   return (
     <ProtectedRoute>
-      <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-2xl mx-auto p-6">
-          <h1 className="text-2xl font-bold mb-6">Nueva Dirección</h1>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                {error}
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-1">
-                  Calle
-                </label>
-                <Input
-                  name="calle"
-                  value={formData.calle}
-                  onChange={handleChange}
-                  required
-                />
+      <div className="container mx-auto px-4 py-12">
+          <Card className="modern-card max-w-3xl mx-auto">
+            <div className="p-8">
+              <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold mb-4 text-gradient">Nueva Dirección</h1>
+                <p className="text-lg text-muted-foreground">
+                  Añade una nueva dirección de envío a tu perfil
+                </p>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Número
-                </label>
-                <Input
-                  name="numero"
-                  value={formData.numero}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
+                    {error}
+                  </div>
+                )}
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Piso (opcional)
-                </label>
-                <Input
-                  name="piso"
-                  value={formData.piso}
-                  onChange={handleChange}
-                  placeholder="Ej: 2º B"
-                />
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Calle
+                    </label>
+                    <Input
+                      name="calle"
+                      value={formData.calle}
+                      onChange={handleChange}
+                      required
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Código Postal
-                </label>
-                <Input
-                  name="codigoPostal"
-                  value={formData.codigoPostal}
-                  onChange={handleChange}
-                  required
-                  pattern="[0-9]{5}"
-                  title="El código postal debe tener 5 dígitos"
-                />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Número
+                    </label>
+                    <Input
+                      name="numero"
+                      value={formData.numero}
+                      onChange={handleChange}
+                      required
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Ciudad
-                </label>
-                <Input
-                  name="ciudad"
-                  value={formData.ciudad}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Piso (opcional)
+                    </label>
+                    <Input
+                      name="piso"
+                      value={formData.piso}
+                      onChange={handleChange}
+                      placeholder="Ej: 2º B"
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
 
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-1">
-                  Provincia
-                </label>
-                <Input
-                  name="provincia"
-                  value={formData.provincia}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Código Postal
+                    </label>
+                    <Input
+                      name="codigoPostal"
+                      value={formData.codigoPostal}
+                      onChange={handleChange}
+                      required
+                      pattern="[0-9]{5}"
+                      title="El código postal debe tener 5 dígitos"
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Ciudad
+                    </label>
+                    <Input
+                      name="ciudad"
+                      value={formData.ciudad}
+                      onChange={handleChange}
+                      required
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium mb-2 text-foreground/80">
+                      Provincia
+                    </label>
+                    <Input
+                      name="provincia"
+                      value={formData.provincia}
+                      onChange={handleChange}
+                      required
+                      className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-4 justify-end pt-6">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => router.back()}
+                    className="border-primary/20 hover:bg-primary/10"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="modern-gradient text-white font-semibold hover:shadow-lg transition-all duration-300"
+                  >
+                    {loading ? 'Guardando...' : 'Guardar Dirección'}
+                  </Button>
+                </div>
+              </form>
             </div>
-
-            <div className="flex gap-4 justify-end pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => router.back()}
-              >
-                Cancelar
-              </Button>
-              <Button
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Guardando...' : 'Guardar Dirección'}
-              </Button>
-            </div>
-          </form>
-        </Card>
+          </Card>
+        </div>
       </div>
     </ProtectedRoute>
   )
