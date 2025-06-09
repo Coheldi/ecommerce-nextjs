@@ -16,30 +16,30 @@ export default function Header() {
   const { user, logout } = useAuth()
   
   return (
-    <header className="border-b">
+    <header className="glass-effect border-b border-white/20 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold">
+            <Link href="/" className="text-2xl font-bold text-gradient">
               FoodMarket
             </Link>
           </div>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/catalogo" className="text-gray-700 hover:text-gray-900">
+            <Link href="/catalogo" className="text-foreground/80 hover:text-primary font-medium transition-colors duration-200">
               Catálogo
             </Link>
-            <Link href="/categorias" className="text-gray-700 hover:text-gray-900">
+            <Link href="/categorias" className="text-foreground/80 hover:text-primary font-medium transition-colors duration-200">
               Categorías
             </Link>
           </nav>
 
           <div className="flex items-center space-x-4">
             <Link href="/carrito">
-              <Button variant="outline" className="relative">
+              <Button variant="outline" className="relative modern-gradient text-white border-none hover:shadow-lg transition-all duration-300">
                 Carrito
                 {state.items.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  <span className="absolute -top-2 -right-2 bg-accent text-primary rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
                     {state.items.length}
                   </span>
                 )}
@@ -49,30 +49,30 @@ export default function Header() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
+                  <Button variant="outline" className="border-primary/20 hover:bg-primary/10 transition-colors duration-200">
                     {user.nombre}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end" className="w-48 glass-effect">
                   <Link href="/perfil">
-                    <DropdownMenuItem className="cursor-pointer">
+                    <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                       Mi Perfil
                     </DropdownMenuItem>
                   </Link>
                   <Link href="/pedidos">
-                    <DropdownMenuItem className="cursor-pointer">
+                    <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                       Mis Pedidos
                     </DropdownMenuItem>
                   </Link>
                   {user.rol === 'admin' && (
                     <Link href="/admin">
-                      <DropdownMenuItem className="cursor-pointer">
+                      <DropdownMenuItem className="cursor-pointer hover:bg-primary/10">
                         Panel de Admin
                       </DropdownMenuItem>
                     </Link>
                   )}
                   <DropdownMenuItem 
-                    className="cursor-pointer text-red-600"
+                    className="cursor-pointer text-destructive hover:bg-destructive/10"
                     onClick={logout}
                   >
                     Cerrar Sesión
@@ -81,7 +81,7 @@ export default function Header() {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button>
+                <Button className="modern-gradient text-white font-semibold hover:shadow-lg transition-all duration-300">
                   Iniciar Sesión
                 </Button>
               </Link>

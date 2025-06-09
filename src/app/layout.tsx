@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <CartProvider>
-            <div className="min-h-screen bg-white flex flex-col">
+            <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5 flex flex-col">
               <Header />
               <main className="flex-grow">
                 {children}
